@@ -12,3 +12,11 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Measure {
+  id           String @id @default(uuid())
+  customerCode String @map("customer_code")
+  imageUrl     String @map("image_url")
+  measureValue Int    @map("measure_value")
+  measureUuid  String @map("measure_uuid")
+}
