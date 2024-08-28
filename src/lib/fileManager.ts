@@ -1,4 +1,4 @@
-import { GoogleAIFileManager } from '@google/generative-ai/dist/server/server'
+import { GoogleAIFileManager } from '@google/generative-ai/server'
 import path from 'path'
 import fs from 'fs'
 
