@@ -7,12 +7,14 @@ export const fileManager = async (base64: string, customerCode: string) => {
 
   const imageBuffer = Buffer.from(base64, 'base64')
 
+  const timestamp = Date.now()
+
   const metadata = {
     mimeType: 'image/jpeg',
-    displayName: `measure_${customerCode}_${Date()}`,
+    displayName: `measure_${customerCode}_${timestamp}`,
   }
 
-  const tempFilePath = path.join('/tmp', 'temp_image.jpg')
+  const tempFilePath = path.join('tmp/', `measure_${customerCode}_${timestamp}.jpg`)
 
   fs.writeFileSync(tempFilePath, imageBuffer)
 
