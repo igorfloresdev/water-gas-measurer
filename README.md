@@ -1,18 +1,3 @@
-# Description
-
-This is my template to Node.js + Express + Typescript feel free to use it and contribute 😉
-<br>
-<br>
-# Pre installed dependencies
-
-* dotenv - For environment files ( ⚠️ Do not forget to put .env and .env.development in .gitignore ⚠️ )
-
-* eslint and prettier - For coding style
-
-* rimraf - To delete dist folder before build
-
-<br>
-
 # Commands
 
 ### To install just:
@@ -32,6 +17,12 @@ This is my template to Node.js + Express + Typescript feel free to use it and co
 <pre>npm run dev</pre>
 
 <br>
+
+# Docker Commands
+
+<br>
+<pre>docker compose build --no-cache</pre>
+<pre>docker compose up -d</pre>
 
 # Conclusion
 
