@@ -11,6 +11,7 @@ const routes = (app: Application) => {
 
   app.post('/upload', MeasureController.create)
   app.patch('/confirm', MeasureController.update)
+  app.get('/:customer_code/list', MeasureController.getAllByCustomerCode)
 
   app.use(errorHandler)
 }

@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { base64Schema } from './base64Schema'
 
-export const MeasureSchema = z.object({
+export const measureSchema = z.object({
   image: base64Schema,
   customer_code: z.string().trim().min(1),
   measure_datetime: z.string().datetime(),

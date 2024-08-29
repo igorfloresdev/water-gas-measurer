@@ -18,6 +18,7 @@ export const generateContext = async (mimeType: string, fileUri: string, measure
     },
     { text: `return me the value of this ${measureType.toLowerCase()} measurer in m³` },
   ])
+
   const resultJson = JSON.parse(result.response.text())
   return resultJson
 }

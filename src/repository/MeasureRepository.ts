@@ -18,10 +18,20 @@ export class MeasureRepository {
     return createdMeasure
   }
 
-  static async getAllByCustomerCode(customerCode: string) {
+  static async getAllByCustomerCode(customerCode: string, measureType?: string) {
+    if (measureType === 'ALL') {
+      const measures = await prisma.measure.findMany({
+        where: {
+          customerCode,
+        },
+      })
+      return measures
+    }
+
     const measures = await prisma.measure.findMany({
       where: {
         customerCode,
+        measureType,
       },
     })
 

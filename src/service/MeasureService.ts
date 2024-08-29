@@ -2,6 +2,7 @@ import { checkDoubleReport } from '../lib/checkDoubleReport'
 import { fileManager } from '../lib/fileManager'
 import { generateContext } from '../lib/generateContext'
 import { MeasureRepository } from '../repository/MeasureRepository'
+import { promises as fsPromises } from 'fs'
 
 export class MeasureService {
   static async create(image: string, customer_code: string, measure_type: 'WATER' | 'GAS', measure_datetime: string) {
@@ -24,12 +25,14 @@ export class MeasureService {
 
     const result = await generateContext(file.mimeType, file.uri, measure_type)
 
+    await fsPromises.unlink(`tmp/${file.displayName}.jpg`)
+
     const measureData = {
       customer_code,
       measure_datetime,
       measure_type,
       image_url: file.uri,
-      measure_value: parseInt(result.value),
+      measure_value: result.value ? parseInt(result.value) : 0,
     }
 
     const createdMeasure = await MeasureRepository.create(measureData)
@@ -46,5 +49,10 @@ export class MeasureService {
 
     const updatedMeasure = await MeasureRepository.update(measureUuid, measureType)
     return updatedMeasure
+  }
+
+  static async getAllByCustomerCode(CustomerCode: string, measureType: string) {
+    const measures = await MeasureRepository.getAllByCustomerCode(CustomerCode, measureType)
+    return measures
   }
 }

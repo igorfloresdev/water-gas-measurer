@@ -4,6 +4,8 @@ import { ZodError } from 'zod'
 
 // eslint-disable-next-line
 function errorHandler(err: Error, req: Request, res: Response, next: NextFunction) {
+  console.error(err)
+
   if (err instanceof ZodError) {
     res.status(400).json({
       error_code: 'INVALID_DATA',
@@ -36,6 +38,22 @@ function errorHandler(err: Error, req: Request, res: Response, next: NextFunctio
       error_description: 'Leitura já confirmada',
     })
 
+    return
+  }
+
+  if (err.message === 'INVALID_TYPE') {
+    res.status(400).json({
+      error_code: 'INVALID_TYPE',
+      error_description: 'Tipo de medição não permitida',
+    })
+    return
+  }
+
+  if (err.message === 'MEASURES_NOT_FOUND') {
+    res.status(404).json({
+      error_code: 'MEASURES_NOT_FOUND',
+      error_description: 'Nenhuma leitura encontrada',
+    })
     return
   }
 
