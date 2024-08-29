@@ -17,4 +17,31 @@ export class MeasureRepository {
 
     return createdMeasure
   }
+
+  static async getAllByCustomerCode(customerCode: string) {
+    const measures = await prisma.measure.findMany({
+      where: {
+        customerCode,
+      },
+    })
+
+    return measures
+  }
+
+  static async getByUuid(measureUuid: string) {
+    const measure = await prisma.measure.findFirst({
+      where: { measureUuid },
+    })
+
+    return measure
+  }
+
+  static async update(measureUuid: string, measureValue: number) {
+    const updatedMeasure = await prisma.measure.update({
+      data: { measureValue, hasConfirmed: true },
+      where: { measureUuid },
+    })
+
+    return updatedMeasure
+  }
 }
